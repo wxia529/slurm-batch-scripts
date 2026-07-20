@@ -1,0 +1,75 @@
+site_name: Slurm Batch Scripts
+site_description: 课题组 Slurm 作业提交脚本使用与维护文档
+site_dir: site
+strict: true
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - 首页: index.md
+  - 使用指南:
+      - 快速开始: getting-started.md
+      - 部署与更新: deployment.md
+      - 环境加载: environment.md
+      - Batch.log: batch-log.md
+  - 集群:
+      - mindu:
+          - 集群说明: clusters/mindu/index.md
+          - Gaussian: clusters/mindu/gaussian.md
+          - CP2K: clusters/mindu/cp2k.md
+          - VASP: clusters/mindu/vasp.md
+      - para-amd:
+          - 集群说明: clusters/para-amd/index.md
+          - Gaussian: clusters/para-amd/gaussian.md
+          - CP2K: clusters/para-amd/cp2k.md
+          - VASP: clusters/para-amd/vasp.md
+          - ORCA: clusters/para-amd/orca.md
+  - 参与维护: contributing.md
