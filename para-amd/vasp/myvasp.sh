@@ -33,12 +33,37 @@ case "${2:-std}" in
 esac
 
 TASK_DIR=$(pwd -P)
-for INPUT_NAME in INCAR POSCAR POTCAR; do
+for INPUT_NAME in INCAR POTCAR; do
     if [[ ! -f "${TASK_DIR}/${INPUT_NAME}" ]]; then
         echo "Error: Required VASP input file does not exist: ${TASK_DIR}/${INPUT_NAME}" >&2
         exit 1
     fi
 done
+
+if [[ -f "${TASK_DIR}/POSCAR" ]]; then
+    INPUT_SUMMARY="INCAR,POSCAR,POTCAR"
+else
+    IMAGE_DIRECTORIES=()
+    for IMAGE_PATH in "${TASK_DIR}"/*; do
+        [[ -d "$IMAGE_PATH" ]] || continue
+        IMAGE_NAME=${IMAGE_PATH##*/}
+        [[ "$IMAGE_NAME" =~ ^[0-9]{2,}$ ]] || continue
+        IMAGE_DIRECTORIES+=("$IMAGE_PATH")
+    done
+
+    if (( ${#IMAGE_DIRECTORIES[@]} < 2 )); then
+        echo "Error: POSCAR is missing and fewer than two VTST image directories were found." >&2
+        exit 1
+    fi
+
+    for IMAGE_PATH in "${IMAGE_DIRECTORIES[@]}"; do
+        if [[ ! -f "${IMAGE_PATH}/POSCAR" ]]; then
+            echo "Error: VTST image POSCAR does not exist: ${IMAGE_PATH}/POSCAR" >&2
+            exit 1
+        fi
+    done
+    INPUT_SUMMARY="INCAR,POTCAR,numeric-image-directories/POSCAR"
+fi
 
 PARTITION="amd_256"
 MPI_PROCESSES=$((NODES * 64))
@@ -101,7 +126,7 @@ JOB_ID=${SBATCH_OUTPUT%%;*}
 [[ -n "$JOB_ID" ]] || { echo "Error: Slurm returned no Job ID." >&2; exit 1; }
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 BATCH_LOG="${TASK_DIR}/Batch.log"
-RECORD="${TIMESTAMP} | VASP | job_id=${JOB_ID} | job=${JOB_NAME} | partition=${PARTITION} | nodes=${NODES} | processes=${MPI_PROCESSES} | directory=${TASK_DIR} | input=INCAR,POSCAR,POTCAR | output=${OUTPUT_FILE}"
+RECORD="${TIMESTAMP} | VASP | job_id=${JOB_ID} | job=${JOB_NAME} | partition=${PARTITION} | nodes=${NODES} | processes=${MPI_PROCESSES} | directory=${TASK_DIR} | input=${INPUT_SUMMARY} | output=${OUTPUT_FILE}"
 if ! (flock -x 9; printf '%s\n' "$RECORD" >&9) 9>> "$BATCH_LOG"; then
     echo "警告：作业已提交，但写入 Batch.log 失败。Job ID: ${JOB_ID}" >&2
 fi

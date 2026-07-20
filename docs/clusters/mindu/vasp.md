@@ -3,14 +3,15 @@
 ## 基本要求
 
 1. 脚本名称为 `myvasp.sh`
-2. 脚本在 VASP 任务目录中运行，并检查 `INCAR`、`POSCAR`、`POTCAR`，不强制检查 `KPOINTS`
-3. 支持三个分区：`small`、`community`、`highio`
-4. 分区支持简写：`s`、`c`、`h`
-5. 默认使用 `small` 分区
-6. 支持指定节点数，默认使用 1 个节点；节点数必须是正整数
-7. 每个节点固定使用 32 个核心
-8. MPI 进程总数等于节点数乘以 32
-9. Slurm 作业名称使用当前任务目录名称
+2. 脚本在 VASP 任务目录中运行，并检查 `INCAR` 和 `POTCAR`，不强制检查 `KPOINTS`
+3. 普通任务要求顶层存在 `POSCAR`；VTST/NEB 任务允许顶层没有 `POSCAR`，但必须有至少两个纯数字镜像目录（如 `00`、`01`），且每个镜像目录中都存在 `POSCAR`
+4. 支持三个分区：`small`、`community`、`highio`
+5. 分区支持简写：`s`、`c`、`h`
+6. 默认使用 `small` 分区
+7. 支持指定节点数，默认使用 1 个节点；节点数必须是正整数
+8. 每个节点固定使用 32 个核心
+9. MPI 进程总数等于节点数乘以 32
+10. Slurm 作业名称使用当前任务目录名称
 
 ## VASP 版本和运行类型
 
@@ -50,7 +51,7 @@ VASP 版本固定为 `6.5.1-vtst`。第三个参数只用于选择运行类型�
 2. 标准错误写入任务目录中的 `vasp.err`
 3. Slurm 成功接收作业后，按照集群通用格式追加任务目录中的 `Batch.log`
 4. `Batch.log` 中的任务目录使用当前 VASP 任务目录的绝对路径
-5. VASP 提交记录使用 `input=INCAR,POSCAR,POTCAR` 和 `output=log`
+5. 普通任务记录 `input=INCAR,POSCAR,POTCAR`；VTST/NEB 任务记录 `input=INCAR,POTCAR,numeric-image-directories/POSCAR`；输出均记录为 `output=log`
 
 ## 调用方式
 
