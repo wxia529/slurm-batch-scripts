@@ -95,7 +95,7 @@ done
 
 CORES_PER_NODE=32
 MPI_PROCESSES=$((NODES * CORES_PER_NODE))
-JOB_NAME="vasp_${VASP_TYPE}"
+JOB_NAME=$(basename -- "$TASK_DIR")
 VASP_COMMAND="vasp_${VASP_TYPE}"
 OUTPUT_FILE="log"
 ERROR_FILE="vasp.err"
@@ -145,6 +145,7 @@ if ! bash -n "$TMP_SCRIPT"; then
 fi
 
 echo "Directory     : $TASK_DIR"
+echo "Job name      : $JOB_NAME"
 echo "VASP command  : $VASP_COMMAND"
 echo "VASP output   : $TASK_DIR/$OUTPUT_FILE"
 echo "VASP error    : $TASK_DIR/$ERROR_FILE"
