@@ -67,7 +67,7 @@ cd calculations/water
 myvasp.sh
 ```
 
-`para-amd` 上的 ORCA：
+ORCA：
 
 ```bash
 myorca.sh water.inp

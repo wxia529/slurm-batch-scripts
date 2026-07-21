@@ -6,7 +6,7 @@
 
 | 集群 | 每节点核心数 | 分区 | Gaussian | CP2K | VASP | ORCA |
 | --- | ---: | --- | :---: | :---: | :---: | :---: |
-| `mindu` | 32 | `small`、`community`、`highio` | ✓ | ✓ | ✓ | — |
+| `mindu` | 32 | `small`、`community`、`highio` | ✓ | ✓ | ✓ | ✓ |
 | `para-amd` | 64 | 固定 `amd_256` | ✓ | ✓ | ✓ | ✓ |
 
 ## 使用流程
