@@ -104,8 +104,8 @@ ulimit -s unlimited
 export PATH=/slurm/bin:/slurm/sbin:/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/liqh/soft/cp2k/latest/exe/bin
 export LD_LIBRARY_PATH=/slurm/lib:/lib64:/usr/lib64:/usr/local/lib64:/home/liqh/soft/cp2k/latest/exe/lib64
 
-if ! source /home/liqh/soft/cp2k/latest/tools/toolchain/install/setup; then
-    echo "Error: Failed to load the CP2K toolchain environment." >&2
+if ! source /home/liqh/soft/cp2k/latest/install/cp2k_env; then
+    echo "Error: Failed to load the CP2K environment." >&2
     exit 1
 fi
 

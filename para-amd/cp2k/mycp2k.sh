@@ -51,8 +51,8 @@ ulimit -s unlimited
 export PATH=/opt/slurm/slurm/sbin:/opt/slurm/slurm/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/public3/home/sc71468/soft/cp2k/latest/exe/bin:/public3/home/sc71468/soft/Multiwfn:/public3/home/sc71468/soft/shs/cp2k
 export LD_LIBRARY_PATH=/opt/slurm/slurm/lib:/lib64:/usr/lib64:/usr/local/lib64:/public3/home/sc71468/soft/cp2k/latest/exe/lib64
 
-if ! source /public3/home/sc71468/soft/cp2k/latest/tools/toolchain/install/setup; then
-    echo "Error: Failed to load the CP2K toolchain environment." >&2
+if ! source /public3/home/sc71468/soft/cp2k/latest/install/cp2k_env; then
+    echo "Error: Failed to load the CP2K environment." >&2
     exit 1
 fi
 if ! source /public3/home/sc71468/soft/ucx/1.21-gcc-13.2/env.sh; then
