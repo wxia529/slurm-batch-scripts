@@ -9,7 +9,7 @@
 部署目录：~/soft/slurm-batchs/
 ```
 
-部署时，`deploy.sh` 根据参数从 `mindu/` 或 `para-amd/` 选择脚本，并从 `docs/clusters/` 选择说明文件。
+部署时，`deploy.sh` 根据参数从对应集群目录（如 `mindu/`、`para-amd/` 或 `para-e5/`）选择脚本，并从 `docs/clusters/` 选择说明文件。
 
 例如：
 
@@ -77,6 +77,8 @@ git pull --ff-only
 ./deploy.sh mindu
 # 或
 ./deploy.sh para-amd
+# 或
+./deploy.sh para-e5
 ```
 
 重复部署只更新项目管理的文件。

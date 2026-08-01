@@ -73,4 +73,10 @@ nav:
           - CP2K: clusters/para-amd/cp2k.md
           - VASP: clusters/para-amd/vasp.md
           - ORCA: clusters/para-amd/orca.md
+      - para-e5:
+          - 集群说明: clusters/para-e5/index.md
+          - CP2K: clusters/para-e5/cp2k.md
+          - QE: clusters/para-e5/qe.md
+          - VASP: clusters/para-e5/vasp.md
+          - ORCA: clusters/para-e5/orca.md
   - 参与维护: contributing.md

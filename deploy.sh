@@ -11,6 +11,7 @@ Usage:
 Cluster:
   mindu
   para-amd
+  para-e5
 
 Target:
   ~/soft/slurm-batchs
@@ -33,7 +34,7 @@ else
 fi
 
 case "$CLUSTER" in
-    mindu|para-amd) ;;
+    mindu|para-amd|para-e5) ;;
     *)
         echo "Error: Unknown cluster: $CLUSTER" >&2
         usage
@@ -153,7 +154,7 @@ if [[ -f "$MANIFEST_FILE" && -z "$DEPLOYED_CLUSTER" ]]; then
 fi
 
 case "$DEPLOYED_CLUSTER" in
-    ""|mindu|para-amd) ;;
+    ""|mindu|para-amd|para-e5) ;;
     *)
         echo "Error: Unknown cluster recorded in deployment manifest: $DEPLOYED_CLUSTER" >&2
         exit 1

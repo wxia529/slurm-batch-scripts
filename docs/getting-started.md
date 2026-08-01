@@ -40,6 +40,12 @@ cd slurm-batch-scripts
 ./deploy.sh para-amd
 ```
 
+在 `para-e5` 上执行：
+
+```bash
+./deploy.sh para-e5
+```
+
 部署完成后加载提交命令：
 
 ```bash
@@ -71,6 +77,12 @@ ORCA：
 
 ```bash
 myorca.sh water.inp
+```
+
+QE：
+
+```bash
+mypw.sh water.in
 ```
 
 命令参数因集群而异，提交前请阅读对应的软件页面。
