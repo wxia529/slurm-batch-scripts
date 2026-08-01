@@ -82,3 +82,25 @@ git pull --ff-only
 ```
 
 重复部署只更新项目管理的文件。
+
+## 发布源码包
+
+项目使用日期 tag 发布完整源码包，格式为：
+
+```text
+release-YYYY-MM-DD
+```
+
+例如：
+
+```text
+release-2026-08-02
+```
+
+推送该 tag 后，GitHub Actions 会执行语法检查、三个集群的隔离部署测试和严格文档构建，然后生成：
+
+```text
+slurm-batchs-2026-08-02.tar.gz
+```
+
+压缩包会上传为 Actions Artifact，并附加到同名 GitHub Release。同一天需要重复发布时，可使用 `release-YYYY-MM-DD-N`，例如 `release-2026-08-02-2`。

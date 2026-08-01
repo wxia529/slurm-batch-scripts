@@ -1,0 +1,103 @@
+name: Build release package
+
+on:
+  push:
+    tags:
+      - "release-*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-package-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ github.ref_name }}
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
+
+      - name: Install documentation dependencies
+        run: pip install -r requirements-docs.txt
+
+      - name: Validate release tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! "$RELEASE_TAG" =~ ^release-[0-9]{4}-[0-9]{2}-[0-9]{2}(-[1-9][0-9]*)?$ ]]; then
+              echo "Unsupported release tag: $RELEASE_TAG" >&2
+              echo "Expected release-YYYY-MM-DD or release-YYYY-MM-DD-N." >&2
+              exit 1
+          fi
+
+      - name: Run shell syntax checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash -n deploy.sh env.sh
+          find mindu para-amd para-e5 -type f -name '*.sh' -print0 | xargs -0 -r bash -n
+          git diff --check
+
+      - name: Test isolated deployments
+        shell: bash
+        run: |
+          set -euo pipefail
+          for cluster in mindu para-amd para-e5; do
+              cluster_target=$(mktemp -d)
+              trap 'rm -rf -- "$cluster_target"' EXIT
+              SLURM_BATCHS_TARGET="$cluster_target" ./deploy.sh "$cluster"
+              test -f "$cluster_target/.slurm-batchs-managed"
+              grep -Fxq "cluster=$cluster" "$cluster_target/.slurm-batchs-managed"
+              rm -rf -- "$cluster_target"
+              trap - EXIT
+          done
+
+      - name: Build documentation
+        run: mkdocs build --strict
+
+      - name: Create source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_date=${RELEASE_TAG#release-}
+          archive_name="slurm-batchs-${release_date}.tar.gz"
+          archive_prefix="slurm-batchs-${release_date}/"
+          git archive --format=tar.gz --prefix="$archive_prefix" --output="$archive_name" "$RELEASE_TAG"
+          test -s "$archive_name"
+          echo "ARCHIVE_NAME=$archive_name" >> "$GITHUB_ENV"
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: slurm-batchs-${{ github.ref_name }}
+          path: ${{ env.ARCHIVE_NAME }}
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_date=${RELEASE_TAG#release-}
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+              gh release upload "$RELEASE_TAG" "$ARCHIVE_NAME" --clobber
+          else
+              gh release create "$RELEASE_TAG" "$ARCHIVE_NAME" \
+                  --title "Slurm Batch Scripts ${release_date}" \
+                  --generate-notes
+          fi
