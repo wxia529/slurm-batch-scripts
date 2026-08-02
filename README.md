@@ -28,6 +28,8 @@ source ~/soft/slurm-batchs/env.sh
 
 完整的部署、使用和维护说明位于 [`docs/`](docs/index.md)，并通过 Material for MkDocs 构建为文档站点。
 
+源码包通过日期 tag 发布，例如 `release-2026-08-02`。发布流程和下载位置见 [`docs/deployment.md`](docs/deployment.md)。
+
 ## 文档维护
 
 `docs/` 是本项目唯一的文档来源。部署目录中的 `README.md` 也由 `docs/` 中对应页面生成，禁止直接维护重复副本。

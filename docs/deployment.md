@@ -85,7 +85,7 @@ git pull --ff-only
 
 ## 发布源码包
 
-项目使用日期 tag 发布完整源码包，格式为：
+项目使用日期 tag 发布完整源码包。发布前先确保目标提交已经推送到 `main`，然后创建并推送一个带注释的 tag：
 
 ```text
 release-YYYY-MM-DD
@@ -97,10 +97,30 @@ release-YYYY-MM-DD
 release-2026-08-02
 ```
 
-推送该 tag 后，GitHub Actions 会执行语法检查、三个集群的隔离部署测试和严格文档构建，然后生成：
+实际操作示例：
+
+```bash
+git switch main
+git pull --ff-only
+git tag -a release-2026-08-02 -m "Release 2026-08-02"
+git push origin release-2026-08-02
+```
+
+推送 tag 后，`.github/workflows/release-package.yml` 会自动运行。它依次执行 Shell 语法检查、三个集群的隔离部署测试和严格文档构建；任一步失败都不会发布 Release。
+
+成功后会生成：
 
 ```text
 slurm-batchs-2026-08-02.tar.gz
 ```
 
-压缩包会上传为 Actions Artifact，并附加到同名 GitHub Release。同一天需要重复发布时，可使用 `release-YYYY-MM-DD-N`，例如 `release-2026-08-02-2`。
+压缩包来自该 tag 对应提交的全部 Git 跟踪文件，不包含 `.git` 目录，也不包含 `site/` 等被 `.gitignore` 忽略的构建产物。
+
+压缩包会同时：
+
+- 上传到该次 Actions 运行的 Artifact（保留 90 天）
+- 附加到同名 GitHub Release 的 Assets
+
+日常下载应使用 GitHub Release 的 Assets；Artifact 主要用于检查某次 Action 运行的构建结果。同一天需要重复发布时，可使用 `release-YYYY-MM-DD-N`，例如 `release-2026-08-02-2`，对应的包名也会带上 `-2`。
+
+如果 Release 没有出现，先到仓库的 **Actions → Build release package** 查看失败步骤；常见原因是 tag 格式不符合要求、文档严格构建失败或部署隔离测试失败。
