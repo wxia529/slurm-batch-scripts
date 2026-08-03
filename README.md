@@ -4,7 +4,7 @@
 
 | 集群 | 每节点核心数 | 分区 | 软件 |
 | --- | ---: | --- | --- |
-| `mindu` | 32 | `small`、`community`、`highio` | Gaussian、CP2K、VASP |
+| `mindu` | 32 | `small`、`community`、`highio` | Gaussian、CP2K、QE、VASP |
 | `para-amd` | 64 | `amd_256` | Gaussian、CP2K、VASP、ORCA |
 | `para-e5` | 24 | `v3_64` | CP2K、QE、VASP、ORCA |
 

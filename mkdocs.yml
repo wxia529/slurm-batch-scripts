@@ -65,6 +65,7 @@ nav:
           - 集群说明: clusters/mindu/index.md
           - Gaussian: clusters/mindu/gaussian.md
           - CP2K: clusters/mindu/cp2k.md
+          - QE: clusters/mindu/qe.md
           - VASP: clusters/mindu/vasp.md
           - ORCA: clusters/mindu/orca.md
       - para-amd:
