@@ -1,6 +1,6 @@
 # CP2K
 
-提交时会在当前目录生成并保留 `mycp2k-tmp`；后续提交可以直接覆盖该文件。
+提交时会在当前目录生成并保留完整的 `mycp2k-tmp`，可执行 `sbatch mycp2k-tmp` 重提相同作业；再次运行 `mycp2k.sh` 会覆盖该文件。
 
 1. 必须提供一个存在的 CP2K 输入文件
 2. 支持三个分区：`small`、`community`、`highio`

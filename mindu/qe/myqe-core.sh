@@ -67,6 +67,10 @@ TMP_SCRIPT="${PWD}/${TMP_SCRIPT_NAME}"
 
 cat > "$TMP_SCRIPT" <<EOF
 #!/usr/bin/env bash
+#SBATCH --job-name=${JOB_NAME}
+#SBATCH --nodes=${NODES}
+#SBATCH --ntasks=${MPI_PROCESSES}
+#SBATCH --partition=${QUEUE}
 
 echo "Starting QE ${PROGRAM} job \$SLURM_JOB_ID at \$(date)"
 echo "SLURM_SUBMIT_DIR: \$SLURM_SUBMIT_DIR"
@@ -109,7 +113,7 @@ if ! command -v sbatch >/dev/null 2>&1 || ! command -v flock >/dev/null 2>&1; th
     echo "Error: sbatch and flock are required." >&2
     exit 1
 fi
-if ! SBATCH_OUTPUT=$(sbatch --parsable --job-name="$JOB_NAME" --nodes="$NODES" --ntasks="$MPI_PROCESSES" --partition="$QUEUE" "$TMP_SCRIPT"); then
+if ! SBATCH_OUTPUT=$(sbatch --parsable "$TMP_SCRIPT"); then
     echo "Error: QE job submission failed." >&2
     exit 1
 fi

@@ -1,6 +1,6 @@
 # VASP
 
-提交时会在当前目录生成并保留 `myvasp-tmp`；后续提交可以直接覆盖该文件。
+提交时会在当前目录生成并保留完整的 `myvasp-tmp`，可执行 `sbatch myvasp-tmp` 重提相同作业；再次运行 `myvasp.sh` 会覆盖该文件。
 
 1. 脚本名称为 `myvasp.sh`
 2. 脚本在 VASP 任务目录中运行，并检查 `INCAR` 和 `POTCAR`，不强制检查 `KPOINTS`

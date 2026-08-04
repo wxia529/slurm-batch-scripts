@@ -1,6 +1,6 @@
 # ORCA
 
-提交时会在当前目录生成并保留 `myorca-tmp`；后续提交可以直接覆盖该文件。
+提交时会在当前目录生成并保留完整的 `myorca-tmp`，可执行 `sbatch myorca-tmp` 重提相同作业；再次运行 `myorca.sh` 会覆盖该文件。
 
 ## 基本要求
 

@@ -37,6 +37,11 @@ TMP_SCRIPT="${PWD}/myg16-tmp"
 
 cat > "$TMP_SCRIPT" <<EOF
 #!/usr/bin/env bash
+#SBATCH --job-name=${JOB_NAME}
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=${CORES}
+#SBATCH --partition=${PARTITION}
 
 echo "Starting Gaussian job \$SLURM_JOB_ID at \$(date)"
 echo "SLURM_SUBMIT_DIR: \$SLURM_SUBMIT_DIR"
@@ -113,7 +118,7 @@ if ! command -v sbatch >/dev/null 2>&1 || ! command -v flock >/dev/null 2>&1; th
     exit 1
 fi
 
-if ! SBATCH_OUTPUT=$(sbatch --parsable --job-name="$JOB_NAME" --nodes=1 --ntasks=1 --cpus-per-task="$CORES" --partition="$PARTITION" "$TMP_SCRIPT"); then
+if ! SBATCH_OUTPUT=$(sbatch --parsable "$TMP_SCRIPT"); then
     echo "Error: Gaussian job submission failed." >&2
     exit 1
 fi
