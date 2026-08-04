@@ -1,5 +1,7 @@
 # Gaussian
 
+提交时会在当前目录生成并保留 `myg16-tmp`；后续提交可以直接覆盖该文件。
+
 1. 必须提供一个存在的 Gaussian 输入文件
 2. 支持三个分区：`small`、`community`、`highio`
 3. 分区支持简写：`s`、`c`、`h`

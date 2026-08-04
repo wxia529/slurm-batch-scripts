@@ -33,8 +33,7 @@ printf -v INPUT_DIR_Q '%q' "$INPUT_DIR"
 printf -v INPUT_NAME_Q '%q' "$INPUT_NAME"
 printf -v LOG_FILE_Q '%q' "$LOG_FILE"
 
-TMP_SCRIPT=$(mktemp "${TMPDIR:-/tmp}/myg16-${USER:-user}-${JOB_NAME}.XXXXXX")
-trap 'rm -f "$TMP_SCRIPT"' EXIT
+TMP_SCRIPT="${PWD}/myg16-tmp"
 
 cat > "$TMP_SCRIPT" <<EOF
 #!/usr/bin/env bash

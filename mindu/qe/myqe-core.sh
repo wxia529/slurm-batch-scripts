@@ -3,36 +3,37 @@
 set -u
 
 usage() {
-    echo "Usage: myqe-core.sh <program> <error_file> <input_file> [queue] [nodes]"
+    echo "Usage: myqe-core.sh <program> <error_file> <tmp_script> <input_file> [queue] [nodes]"
 }
 
-if (( $# < 3 || $# > 5 )); then
-    echo "Error: A QE program, error file, input file, and optional queue/nodes are required." >&2
+if (( $# < 4 || $# > 6 )); then
+    echo "Error: A QE program, error file, temporary script name, input file, and optional queue/nodes are required." >&2
     usage
     exit 1
 fi
 
 PROGRAM=$1
 ERROR_FILE=$2
-INPUT_ARG=$3
+TMP_SCRIPT_NAME=$3
+INPUT_ARG=$4
 if [[ ! -f "$INPUT_ARG" ]]; then
     echo "Error: Input file does not exist: $INPUT_ARG" >&2
     exit 1
 fi
 
-case "${4:-}" in
+case "${5:-}" in
     s|small) QUEUE="small" ;;
     c|community) QUEUE="community" ;;
     h|highio) QUEUE="highio" ;;
     "") QUEUE="small" ;;
     *)
-        echo "Error: Unknown queue: $4" >&2
+        echo "Error: Unknown queue: $5" >&2
         usage
         exit 1
         ;;
 esac
 
-NODES=${5:-1}
+NODES=${6:-1}
 if [[ ! "$NODES" =~ ^[1-9][0-9]*$ ]]; then
     echo "Error: Nodes must be a positive integer: $NODES" >&2
     exit 1
@@ -62,8 +63,7 @@ else
     RUN_COMMAND="mpirun -n ${MPI_PROCESSES} ${PROGRAM_Q} -inp ${INPUT_NAME_Q} > ${OUTPUT_FILE_Q} 2> ${ERROR_FILE_Q}"
 fi
 
-TMP_SCRIPT=$(mktemp "${TMPDIR:-/tmp}/myqe-${USER:-user}-${JOB_NAME}.XXXXXX")
-trap 'rm -f "$TMP_SCRIPT"' EXIT
+TMP_SCRIPT="${PWD}/${TMP_SCRIPT_NAME}"
 
 cat > "$TMP_SCRIPT" <<EOF
 #!/usr/bin/env bash

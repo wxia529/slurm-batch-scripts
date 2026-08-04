@@ -88,8 +88,7 @@ printf -v INPUT_NAME_Q '%q' "$INPUT_NAME"
 printf -v OUTPUT_FILE_Q '%q' "$OUTPUT_FILE"
 printf -v ERROR_FILE_Q '%q' "$ERROR_FILE"
 
-TMP_SCRIPT=$(mktemp "${TMPDIR:-/tmp}/cp2k-${USER:-user}-${JOB_NAME}.XXXXXX")
-trap 'rm -f "$TMP_SCRIPT"' EXIT
+TMP_SCRIPT="${PWD}/mycp2k-tmp"
 
 cat > "$TMP_SCRIPT" <<EOF
 #!/usr/bin/env bash

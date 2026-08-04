@@ -129,8 +129,7 @@ TOOLCHAIN_ENV="/home/liqh/soft/toolchain/vasp651.env"
 
 printf -v TASK_DIR_Q '%q' "$TASK_DIR"
 
-TMP_SCRIPT=$(mktemp "${TMPDIR:-/tmp}/myvasp-${USER:-user}-${VASP_TYPE}.XXXXXX")
-trap 'rm -f "$TMP_SCRIPT"' EXIT
+TMP_SCRIPT="${PWD}/myvasp-tmp"
 
 cat > "$TMP_SCRIPT" <<EOF
 #!/usr/bin/env bash

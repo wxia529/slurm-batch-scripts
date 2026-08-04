@@ -1,5 +1,7 @@
 # VASP
 
+提交时会在当前目录生成并保留 `myvasp-tmp`；后续提交可以直接覆盖该文件。
+
 1. 脚本名称为 `myvasp.sh`
 2. 脚本在 VASP 任务目录中运行，并检查 `INCAR` 和 `POTCAR`，不强制检查 `KPOINTS`
 3. 普通任务要求顶层存在 `POSCAR`；VTST/NEB 任务允许顶层没有 `POSCAR`，但必须有至少两个纯数字镜像目录（如 `00`、`01`），且每个镜像目录中都存在 `POSCAR`
