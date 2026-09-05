@@ -79,8 +79,8 @@ echo "QE input: ${INPUT_FILE}"
 echo "Requested MPI processes: \$SLURM_NTASKS"
 ulimit -s unlimited
 
-export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/liqh/soft/QE/qe-7.5/bin
-export LD_LIBRARY_PATH=/lib64:/usr/lib64:/usr/local/lib64:/home/liqh/soft/QE/qe-7.5/lib
+export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/liqh/soft/QE/qe-7.6/bin
+export LD_LIBRARY_PATH=/lib64:/usr/lib64:/usr/local/lib64:/home/liqh/soft/QE/qe-7.6/lib
 if ! source /home/liqh/soft/QE/env.sh; then
     echo "Error: Failed to load the Quantum ESPRESSO environment." >&2
     exit 1

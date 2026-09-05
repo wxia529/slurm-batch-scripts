@@ -51,8 +51,8 @@ echo "Running on node(s): \$SLURM_NODELIST"
 echo "Requested MPI processes: \$SLURM_NTASKS"
 ulimit -s unlimited
 
-export PATH=/publicfs01/fs1-9/home/sc32041/soft/QE/qe-7.5/bin:/opt/slurm/slurm/sbin:/opt/slurm/slurm/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin
-export LD_LIBRARY_PATH=/publicfs01/fs1-9/home/sc32041/soft/QE/qe-7.5/lib:/opt/slurm/slurm/lib:/lib64:/usr/lib64:/usr/local/lib64
+export PATH=/publicfs01/fs1-9/home/sc32041/soft/QE/qe-7.6/bin:/opt/slurm/slurm/sbin:/opt/slurm/slurm/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin
+export LD_LIBRARY_PATH=/publicfs01/fs1-9/home/sc32041/soft/QE/qe-7.6/lib:/opt/slurm/slurm/lib:/lib64:/usr/lib64:/usr/local/lib64
 if ! source /publicfs01/fs1-9/home/sc32041/soft/toolchain/qe.env; then
     echo "Error: Failed to load the Quantum ESPRESSO environment." >&2
     exit 1
