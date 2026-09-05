@@ -80,4 +80,9 @@ nav:
           - QE: clusters/para-e5/qe.md
           - VASP: clusters/para-e5/vasp.md
           - ORCA: clusters/para-e5/orca.md
+      - tianjin:
+          - 集群说明: clusters/tianjin/index.md
+          - QE: clusters/tianjin/qe.md
+          - VASP: clusters/tianjin/vasp.md
+          - ORCA: clusters/tianjin/orca.md
   - 参与维护: contributing.md

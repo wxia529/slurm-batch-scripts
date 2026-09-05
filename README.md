@@ -4,9 +4,10 @@
 
 | 集群 | 每节点核心数 | 分区 | 软件 |
 | --- | ---: | --- | --- |
-| `mindu` | 32 | `small`、`community`、`highio` | Gaussian、CP2K、QE、VASP |
+| `mindu` | 32 | `small`、`community`、`highio` | Gaussian、CP2K、QE、VASP、ORCA |
 | `para-amd` | 64 | `amd_256` | Gaussian、CP2K、VASP、ORCA |
 | `para-e5` | 24 | `v3_64` | CP2K、QE、VASP、ORCA |
+| `tianjin` | 48 | 集群默认分区 | QE、VASP、ORCA |
 
 ## 快速开始
 
@@ -18,6 +19,8 @@
 ./deploy.sh para-amd
 # 或
 ./deploy.sh para-e5
+# 或
+./deploy.sh tianjin
 ```
 
 加载提交命令：

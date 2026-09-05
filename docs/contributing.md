@@ -45,6 +45,10 @@ bash -n para-e5/cp2k/mycp2k.sh
 bash -n para-e5/orca/myorca.sh
 bash -n para-e5/qe/mypw.sh
 find para-e5/qe -type f -name '*.sh' -print0 | xargs -0 -r bash -n
+bash -n tianjin/vasp/myvasp.sh
+bash -n tianjin/qe/myqe-core.sh
+find tianjin/qe -type f -name '*.sh' -print0 | xargs -0 -r bash -n
+bash -n tianjin/orca/myorca.sh
 mkdocs build --strict
 git diff --check
 ```

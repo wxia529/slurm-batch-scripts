@@ -46,6 +46,12 @@ cd slurm-batch-scripts
 ./deploy.sh para-e5
 ```
 
+在 `tianjin` 上执行：
+
+```bash
+./deploy.sh tianjin
+```
+
 部署完成后加载提交命令：
 
 ```bash

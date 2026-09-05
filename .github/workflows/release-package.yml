@@ -48,14 +48,14 @@ jobs:
         run: |
           set -euo pipefail
           bash -n deploy.sh env.sh
-          find mindu para-amd para-e5 -type f -name '*.sh' -print0 | xargs -0 -r bash -n
+          find mindu para-amd para-e5 tianjin -type f -name '*.sh' -print0 | xargs -0 -r bash -n
           git diff --check
 
       - name: Test isolated deployments
         shell: bash
         run: |
           set -euo pipefail
-          for cluster in mindu para-amd para-e5; do
+          for cluster in mindu para-amd para-e5 tianjin; do
               cluster_target=$(mktemp -d)
               trap 'rm -rf -- "$cluster_target"' EXIT
               SLURM_BATCHS_TARGET="$cluster_target" ./deploy.sh "$cluster"
