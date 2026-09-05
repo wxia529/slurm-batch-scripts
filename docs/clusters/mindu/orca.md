@@ -42,7 +42,8 @@
     ```
 
 7. 完成路径重建后加载 `/home/liqh/soft/openmpi/4.1.6-gcc13.4/env.sh`，加载失败时立即退出
-8. 使用 ORCA 完整路径直接启动，不通过 `mpirun`
+8. 固定设置 `OMPI_MCA_pml=ucx` 和 `OMPI_MCA_btl=^openib`
+9. 使用 ORCA 完整路径直接启动，不通过 `mpirun`
 
 ## 输出和提交记录
 

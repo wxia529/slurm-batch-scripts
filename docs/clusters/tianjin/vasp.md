@@ -5,7 +5,7 @@
 1. VASP 版本为 6.5.1 VTST，程序目录为 `/data/home/liqh/soft/vasp/vasp.6.5.1/bin`
 2. 固定加载 `/data/home/liqh/soft/vasp/env.sh`
 3. 每个节点固定使用 48 个核心，支持多节点 MPI
-4. 当前不固定 Slurm 分区，使用集群默认分区
+4. 固定使用 `p1` 分区
 5. 支持 `std`、`gam` 和 `ncl`，默认使用 `std`
 6. MPI 进程总数等于节点数乘以 48，固定设置 `OMP_NUM_THREADS=1`
 7. 脚本在当前 VASP 任务目录运行，并检查 `INCAR` 和 `POTCAR`

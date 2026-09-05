@@ -34,6 +34,7 @@ JOB_NAME=${INPUT_NAME%.*}
 OUTPUT_FILE="${JOB_NAME}.log"
 CORES_PER_NODE=48
 MPI_PROCESSES=$((NODES * CORES_PER_NODE))
+PARTITION="p1"
 QE_HOME="/data/home/liqh/soft/QE/qe-7.6"
 QE_ENV="/data/home/liqh/soft/QE/env.sh"
 
@@ -51,6 +52,7 @@ cat > "$TMP_SCRIPT" <<EOF
 #SBATCH --nodes=${NODES}
 #SBATCH --ntasks=${MPI_PROCESSES}
 #SBATCH --ntasks-per-node=${CORES_PER_NODE}
+#SBATCH --partition=${PARTITION}
 
 echo "Starting QE ${PROGRAM} job \$SLURM_JOB_ID at \$(date)"
 echo "SLURM_SUBMIT_DIR: \$SLURM_SUBMIT_DIR"
@@ -93,7 +95,7 @@ echo "Input         : $INPUT_FILE"
 echo "QE program    : $PROGRAM"
 echo "QE output     : $INPUT_DIR/$OUTPUT_FILE"
 echo "QE error      : $INPUT_DIR/$ERROR_FILE"
-echo "Partition     : cluster default"
+echo "Partition     : $PARTITION"
 echo "Nodes         : $NODES"
 echo "MPI processes : $MPI_PROCESSES"
 
@@ -110,7 +112,7 @@ JOB_ID=${SBATCH_OUTPUT%%;*}
 [[ -n "$JOB_ID" ]] || { echo "Error: Slurm returned no Job ID." >&2; exit 1; }
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 BATCH_LOG="${INPUT_DIR}/Batch.log"
-RECORD="${TIMESTAMP} | QE | job_id=${JOB_ID} | job=${JOB_NAME} | program=${PROGRAM} | partition=default | nodes=${NODES} | processes=${MPI_PROCESSES} | directory=${INPUT_DIR} | input=${INPUT_NAME} | output=${OUTPUT_FILE}"
+RECORD="${TIMESTAMP} | QE | job_id=${JOB_ID} | job=${JOB_NAME} | program=${PROGRAM} | partition=${PARTITION} | nodes=${NODES} | processes=${MPI_PROCESSES} | directory=${INPUT_DIR} | input=${INPUT_NAME} | output=${OUTPUT_FILE}"
 if ! (flock -x 9; printf '%s\n' "$RECORD" >&9) 9>> "$BATCH_LOG"; then
     echo "警告：作业已提交，但写入 Batch.log 失败。Job ID: ${JOB_ID}" >&2
 fi

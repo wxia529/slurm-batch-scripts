@@ -25,8 +25,9 @@
     ```
 
 13. 固定设置 `XTBEXE=/public3/home/sc71468/soft/xtb-dist/bin/xtb`
-14. 使用 ORCA 完整路径直接启动，不通过 `mpirun`
-15. Slurm 成功接收作业后追加输入目录中的 `Batch.log`
+14. 固定设置 `OMPI_MCA_pml=ucx` 和 `OMPI_MCA_btl=^openib`
+15. 使用 ORCA 完整路径直接启动，不通过 `mpirun`
+16. Slurm 成功接收作业后追加输入目录中的 `Batch.log`
 
 ## 调用方式
 

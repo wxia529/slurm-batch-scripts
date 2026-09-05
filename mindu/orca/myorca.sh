@@ -114,6 +114,8 @@ if ! source ${OPENMPI_ENV}; then
     echo "Error: Failed to load the OpenMPI environment: ${OPENMPI_ENV}" >&2
     exit 1
 fi
+export OMPI_MCA_pml=ucx
+export OMPI_MCA_btl=^openib
 
 cd ${INPUT_DIR_Q} || exit 1
 

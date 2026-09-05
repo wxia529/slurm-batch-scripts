@@ -30,7 +30,7 @@
 16. 完成上述环境重建后，按照以下顺序加载环境文件：
     1. CP2K：`/home/liqh/soft/cp2k/latest/install/cp2k_env`
     2. UCX：`/home/liqh/soft/ucx/1.20.1-gcc13.4/env.sh`
-17. 固定设置 `OMPI_MCA_btl="^openib"`
+17. 固定设置 `OMPI_MCA_pml=ucx` 和 `OMPI_MCA_btl=^openib`
 18. 使用 `mpirun -n <MPI 进程总数> cp2k.psmp <输入文件>` 启动作业
 19. Slurm 成功接收作业后，按照集群通用格式追加输入目录中的 `Batch.log`
 

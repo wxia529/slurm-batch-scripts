@@ -27,9 +27,10 @@
 13. 完成路径重建后依次加载：
     1. `/public3/home/sc71468/soft/cp2k/latest/install/cp2k_env`
     2. `/public3/home/sc71468/soft/ucx/1.21-gcc-13.2/env.sh`
-14. 固定设置 `OMP_NUM_THREADS=1`
-15. 使用 `mpirun -n <节点数乘以 64> cp2k.psmp <输入文件>` 启动作业
-16. Slurm 成功接收作业后追加输入目录中的 `Batch.log`
+14. 固定设置 `OMPI_MCA_pml=ucx` 和 `OMPI_MCA_btl=^openib`
+15. 固定设置 `OMP_NUM_THREADS=1`
+16. 使用 `mpirun -n <节点数乘以 64> cp2k.psmp <输入文件>` 启动作业
+17. Slurm 成功接收作业后追加输入目录中的 `Batch.log`
 
 ## 调用方式
 

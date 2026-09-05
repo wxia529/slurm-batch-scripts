@@ -15,8 +15,9 @@
 11. ORCA 安装目录为 `/publicfs01/fs1-9/home/sc32041/soft/orca/6.1.1`
 12. OpenMPI 安装目录为 `/publicfs01/fs1-9/home/sc32041/soft/openmpi/4.1.6-gcc14.3`
 13. 设置 `XTBEXE=/publicfs01/fs1-9/home/sc32041/soft/xtb-dist/bin/xtb`
-14. 使用 ORCA 完整路径直接启动，不额外通过 `mpirun` 启动
-15. Slurm 成功接收作业后追加输入目录中的 `Batch.log`
+14. 固定设置 `OMPI_MCA_pml=ucx` 和 `OMPI_MCA_btl=^openib`
+15. 使用 ORCA 完整路径直接启动，不额外通过 `mpirun` 启动
+16. Slurm 成功接收作业后追加输入目录中的 `Batch.log`
 
 ORCA 的 `%pal nprocs` 不应超过脚本申请的节点总核心数（节点数乘以 24）。
 

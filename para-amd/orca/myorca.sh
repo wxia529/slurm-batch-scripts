@@ -55,6 +55,8 @@ ulimit -s unlimited
 export PATH=/opt/slurm/slurm/sbin:/opt/slurm/slurm/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:${ORCA_HOME}:/public3/home/sc71468/soft/openmpi/4.1.6/bin
 export LD_LIBRARY_PATH=/opt/slurm/slurm/lib:/lib64:/usr/lib64:/usr/local/lib64:${ORCA_HOME}:/public3/home/sc71468/soft/openmpi/4.1.6/lib
 export XTBEXE=/public3/home/sc71468/soft/xtb-dist/bin/xtb
+export OMPI_MCA_pml=ucx
+export OMPI_MCA_btl=^openib
 
 cd ${INPUT_DIR_Q} || exit 1
 ${ORCA_HOME}/orca ${INPUT_NAME_Q} > ${LOG_FILE_Q} 2> ${ERROR_FILE_Q}

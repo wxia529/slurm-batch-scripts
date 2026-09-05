@@ -117,7 +117,8 @@ if ! source /home/liqh/soft/ucx/1.20.1-gcc13.4/env.sh; then
     exit 1
 fi
 
-export OMPI_MCA_btl="^openib"
+export OMPI_MCA_pml=ucx
+export OMPI_MCA_btl=^openib
 export OMP_NUM_THREADS=1
 
 cd ${INPUT_DIR_Q} || exit 1

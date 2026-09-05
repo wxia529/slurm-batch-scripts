@@ -61,6 +61,8 @@ if ! source /publicfs01/fs1-9/home/sc32041/soft/ucx/1.21-gcc-14.3/env.sh; then
     echo "Error: Failed to load the UCX environment." >&2
     exit 1
 fi
+export OMPI_MCA_pml=ucx
+export OMPI_MCA_btl=^openib
 export OMP_NUM_THREADS=1
 
 cd ${INPUT_DIR_Q} || exit 1

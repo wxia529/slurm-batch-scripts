@@ -14,9 +14,10 @@
 10. 启动作业前覆盖重建 `PATH` 和 `LD_LIBRARY_PATH`
 11. 加载 `/publicfs01/fs1-9/home/sc32041/soft/cp2k/latest/install/cp2k_env`
 12. 随后加载 `/publicfs01/fs1-9/home/sc32041/soft/ucx/1.21-gcc-14.3/env.sh`
-13. 固定设置 `OMP_NUM_THREADS=1`
-14. 使用 `mpirun -n <节点数乘以 24> cp2k.psmp <输入文件>` 启动作业
-15. Slurm 成功接收作业后追加输入目录中的 `Batch.log`
+13. 固定设置 `OMPI_MCA_pml=ucx` 和 `OMPI_MCA_btl=^openib`
+14. 固定设置 `OMP_NUM_THREADS=1`
+15. 使用 `mpirun -n <节点数乘以 24> cp2k.psmp <输入文件>` 启动作业
+16. Slurm 成功接收作业后追加输入目录中的 `Batch.log`
 
 ## 调用方式
 
