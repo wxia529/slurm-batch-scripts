@@ -34,6 +34,7 @@ PARTITION="p1"
 CP2K_HOME="/data/home/liqh/soft/cp2k/2026.2"
 CP2K_INSTALL="${CP2K_HOME}/install"
 CP2K_ENV="${CP2K_INSTALL}/cp2k_env"
+UCX_ENV="/data/home/liqh/soft/ucx/1.22-gcc8.5/env.sh"
 
 printf -v INPUT_DIR_Q '%q' "$INPUT_DIR"
 printf -v INPUT_NAME_Q '%q' "$INPUT_NAME"
@@ -60,6 +61,10 @@ export PATH=${CP2K_INSTALL}/bin:/data/home/liqh/.local/bin:/data/home/liqh/bin:/
 export LD_LIBRARY_PATH=${CP2K_INSTALL}/lib64:${CP2K_INSTALL}/lib:/usr/local/lib64:/usr/local/lib:/usr/lib64:/usr/lib:/lib64:/lib
 if ! source ${CP2K_ENV}; then
     echo "Error: Failed to load the CP2K environment: ${CP2K_ENV}" >&2
+    exit 1
+fi
+if ! source ${UCX_ENV}; then
+    echo "Error: Failed to load the UCX environment: ${UCX_ENV}" >&2
     exit 1
 fi
 
