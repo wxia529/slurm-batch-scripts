@@ -3,8 +3,8 @@
 提交时会在当前目录生成并保留完整的 `mycp2k-tmp`，可执行 `sbatch mycp2k-tmp` 重提相同作业；再次运行 `mycp2k.sh` 会覆盖该文件。
 
 1. CP2K 版本为 2026.2，安装目录为 `/data/home/liqh/soft/cp2k/2026.2`
-2. CP2K 程序路径为 `/data/home/liqh/soft/cp2k/2026.2/bin/cp2k.psmp`
-3. 固定加载 `/data/home/liqh/soft/cp2k/env.sh`
+2. 将 `/data/home/liqh/soft/cp2k/2026.2/install/bin` 写入 `PATH`，运行时使用命令名 `cp2k.psmp`
+3. 固定加载 `/data/home/liqh/soft/cp2k/2026.2/install/cp2k_env`
 4. 启动作业前覆盖重建 `PATH` 和 `LD_LIBRARY_PATH`
 5. 每个节点使用 48 个 MPI 进程，支持多节点
 6. 固定使用 `p1` 分区

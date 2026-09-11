@@ -66,6 +66,11 @@ export OMPI_MCA_pml=ucx
 export OMPI_MCA_btl=^openib
 export OMP_NUM_THREADS=1
 
+if ! command -v cp2k.psmp >/dev/null 2>&1; then
+    echo "Error: cp2k.psmp is unavailable after loading the CP2K environment." >&2
+    exit 1
+fi
+
 cd ${INPUT_DIR_Q} || exit 1
 mpirun -n ${MPI_PROCESSES} cp2k.psmp ${INPUT_NAME_Q} > ${OUTPUT_FILE_Q} 2> ${ERROR_FILE_Q}
 STATUS=\$?

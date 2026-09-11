@@ -32,8 +32,8 @@ CORES_PER_NODE=48
 MPI_PROCESSES=$((NODES * CORES_PER_NODE))
 PARTITION="p1"
 CP2K_HOME="/data/home/liqh/soft/cp2k/2026.2"
-CP2K_ENV="/data/home/liqh/soft/cp2k/env.sh"
-CP2K_COMMAND="${CP2K_HOME}/bin/cp2k.psmp"
+CP2K_INSTALL="${CP2K_HOME}/install"
+CP2K_ENV="${CP2K_INSTALL}/cp2k_env"
 
 printf -v INPUT_DIR_Q '%q' "$INPUT_DIR"
 printf -v INPUT_NAME_Q '%q' "$INPUT_NAME"
@@ -56,8 +56,8 @@ echo "Running on node(s): \$SLURM_NODELIST"
 echo "Requested MPI processes: \$SLURM_NTASKS"
 ulimit -s unlimited
 
-export PATH=${CP2K_HOME}/bin:/data/home/liqh/.local/bin:/data/home/liqh/bin:/usr/share/Modules/bin:/usr/lpp/mmfs/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-export LD_LIBRARY_PATH=${CP2K_HOME}/lib64:${CP2K_HOME}/lib:/usr/local/lib64:/usr/local/lib:/usr/lib64:/usr/lib:/lib64:/lib
+export PATH=${CP2K_INSTALL}/bin:/data/home/liqh/.local/bin:/data/home/liqh/bin:/usr/share/Modules/bin:/usr/lpp/mmfs/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+export LD_LIBRARY_PATH=${CP2K_INSTALL}/lib64:${CP2K_INSTALL}/lib:/usr/local/lib64:/usr/local/lib:/usr/lib64:/usr/lib:/lib64:/lib
 if ! source ${CP2K_ENV}; then
     echo "Error: Failed to load the CP2K environment: ${CP2K_ENV}" >&2
     exit 1
@@ -71,13 +71,13 @@ if ! command -v mpirun >/dev/null 2>&1; then
     echo "Error: mpirun is unavailable after loading ${CP2K_ENV}." >&2
     exit 1
 fi
-if [[ ! -x "${CP2K_COMMAND}" ]]; then
-    echo "Error: CP2K executable is unavailable: ${CP2K_COMMAND}" >&2
+if ! command -v cp2k.psmp >/dev/null 2>&1; then
+    echo "Error: cp2k.psmp is unavailable after loading ${CP2K_ENV}." >&2
     exit 1
 fi
 
 cd ${INPUT_DIR_Q} || exit 1
-mpirun -n ${MPI_PROCESSES} ${CP2K_COMMAND} ${INPUT_NAME_Q} > ${OUTPUT_FILE_Q} 2> ${ERROR_FILE_Q}
+mpirun -n ${MPI_PROCESSES} cp2k.psmp ${INPUT_NAME_Q} > ${OUTPUT_FILE_Q} 2> ${ERROR_FILE_Q}
 STATUS=\$?
 echo "CP2K job \$SLURM_JOB_ID finished with status \$STATUS at \$(date)"
 exit \$STATUS

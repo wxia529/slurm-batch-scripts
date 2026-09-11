@@ -16,7 +16,7 @@
 12. 随后加载 `/publicfs01/fs1-9/home/sc32041/soft/ucx/1.21-gcc-14.3/env.sh`
 13. 固定设置 `OMPI_MCA_pml=ucx` 和 `OMPI_MCA_btl=^openib`
 14. 固定设置 `OMP_NUM_THREADS=1`
-15. 使用 `mpirun -n <节点数乘以 24> cp2k.psmp <输入文件>` 启动作业
+15. 通过 `PATH` 检查并使用命令名 `cp2k.psmp`，不构造 CP2K 可执行文件的绝对路径；使用 `mpirun -n <节点数乘以 24> cp2k.psmp <输入文件>` 启动作业
 16. Slurm 成功接收作业后追加输入目录中的 `Batch.log`
 
 ## 调用方式
