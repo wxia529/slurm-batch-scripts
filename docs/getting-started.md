@@ -34,18 +34,6 @@ cd slurm-batch-scripts
 ./deploy.sh mindu
 ```
 
-在 `para-amd` 上执行：
-
-```bash
-./deploy.sh para-amd
-```
-
-在 `para-e5` 上执行：
-
-```bash
-./deploy.sh para-e5
-```
-
 在 `tianjin` 上执行：
 
 ```bash
