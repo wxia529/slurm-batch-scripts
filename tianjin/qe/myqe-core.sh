@@ -44,6 +44,12 @@ printf -v OUTPUT_FILE_Q '%q' "$OUTPUT_FILE"
 printf -v ERROR_FILE_Q '%q' "$ERROR_FILE"
 printf -v PROGRAM_Q '%q' "$PROGRAM"
 
+if [[ "$PROGRAM" == "fdvib" ]]; then
+    RUN_COMMAND="${PROGRAM_Q} -inp ${INPUT_NAME_Q} > ${OUTPUT_FILE_Q} 2> ${ERROR_FILE_Q}"
+else
+    RUN_COMMAND="mpirun -n ${MPI_PROCESSES} ${PROGRAM_Q} -inp ${INPUT_NAME_Q} > ${OUTPUT_FILE_Q} 2> ${ERROR_FILE_Q}"
+fi
+
 TMP_SCRIPT="${PWD}/${TMP_SCRIPT_NAME}"
 
 cat > "$TMP_SCRIPT" <<EOF
@@ -79,7 +85,7 @@ if ! command -v ${PROGRAM_Q} >/dev/null 2>&1; then
 fi
 
 cd ${INPUT_DIR_Q} || exit 1
-mpirun -n ${MPI_PROCESSES} ${PROGRAM_Q} -inp ${INPUT_NAME_Q} > ${OUTPUT_FILE_Q} 2> ${ERROR_FILE_Q}
+${RUN_COMMAND}
 STATUS=\$?
 echo "QE ${PROGRAM} job \$SLURM_JOB_ID finished with status \$STATUS at \$(date)"
 exit \$STATUS

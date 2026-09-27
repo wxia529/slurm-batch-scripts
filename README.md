@@ -5,7 +5,7 @@
 | 集群 | 每节点核心数 | 分区 | 软件 |
 | --- | ---: | --- | --- |
 | `mindu` | 32 | `small`、`community`、`highio` | Gaussian、CP2K、QE、VASP、ORCA |
-| `neimeng-2`（内蒙二区） | 40 | `p1` | VASP |
+| `neimeng-2` | 40 | `p1` | QE、VASP、ORCA |
 | `tianjin` | 48 | `p1` | CP2K、QE、VASP、ORCA |
 
 ## 快速开始

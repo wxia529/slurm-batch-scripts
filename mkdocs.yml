@@ -68,9 +68,11 @@ nav:
           - QE: clusters/mindu/qe.md
           - VASP: clusters/mindu/vasp.md
           - ORCA: clusters/mindu/orca.md
-      - 内蒙二区:
+      - neimeng-2:
           - 集群说明: clusters/neimeng-2/index.md
+          - QE: clusters/neimeng-2/qe.md
           - VASP: clusters/neimeng-2/vasp.md
+          - ORCA: clusters/neimeng-2/orca.md
       - tianjin:
           - 集群说明: clusters/tianjin/index.md
           - CP2K: clusters/tianjin/cp2k.md

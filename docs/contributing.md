@@ -39,7 +39,7 @@ bash -n deploy.sh env.sh
 bash -n mindu/cp2k/mycp2k.sh
 bash -n mindu/qe/myqe-core.sh
 find mindu/qe -type f -name '*.sh' -print0 | xargs -0 -r bash -n
-bash -n neimeng-2/vasp/myvasp.sh
+find neimeng-2 -type f -name '*.sh' -print0 | xargs -0 -r bash -n
 bash -n tianjin/vasp/myvasp.sh
 bash -n tianjin/cp2k/mycp2k.sh
 bash -n tianjin/qe/myqe-core.sh

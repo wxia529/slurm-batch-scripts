@@ -31,7 +31,7 @@
 | `myneb.sh` | `neb.x` | `myneb.sh <input_file> [queue] [nodes]` |
 | `myfd.sh` | 自定义 `fdvib` | `myfd.sh <input_file> [queue] [nodes]` |
 
-`fdvib` 使用现有平台脚本约定的 `fdvib -inp <输入文件>`，并通过同一套 QE 环境加载和资源配置运行。
+`fdvib` 是单进程驱动程序。作业仍按节点数申请完整资源，但只启动一次 `fdvib -inp <输入文件>`，不使用 `mpirun` 启动多个驱动；其余 QE 模块保持 MPI 启动方式。
 
 ## 示例
 
