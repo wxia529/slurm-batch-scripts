@@ -34,6 +34,12 @@ cd slurm-batch-scripts
 ./deploy.sh mindu
 ```
 
+在内蒙二区执行：
+
+```bash
+./deploy.sh neimeng-2
+```
+
 在 `tianjin` 上执行：
 
 ```bash

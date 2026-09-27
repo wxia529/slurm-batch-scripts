@@ -9,7 +9,7 @@
 部署目录：~/soft/slurm-batchs/
 ```
 
-部署时，`deploy.sh` 根据参数从对应集群目录（`mindu/` 或 `tianjin/`）选择脚本，并从 `docs/clusters/` 选择说明文件。
+部署时，`deploy.sh` 根据参数从对应集群目录（`mindu/`、`neimeng-2/` 或 `tianjin/`）选择脚本，并从 `docs/clusters/` 选择说明文件。
 
 例如：
 
@@ -76,6 +76,8 @@ git pull --ff-only
 ```bash
 ./deploy.sh mindu
 # 或
+./deploy.sh neimeng-2
+# 或
 ./deploy.sh tianjin
 ```
 
@@ -104,7 +106,7 @@ git tag -a release-2026-08-02 -m "Release 2026-08-02"
 git push origin release-2026-08-02
 ```
 
-推送 tag 后，`.github/workflows/release-package.yml` 会自动运行。它依次执行 Shell 语法检查、两个集群的隔离部署测试和严格文档构建；任一步失败都不会发布 Release。
+推送 tag 后，`.github/workflows/release-package.yml` 会自动运行。它依次执行 Shell 语法检查、三个集群的隔离部署测试和严格文档构建；任一步失败都不会发布 Release。
 
 成功后会生成：
 
