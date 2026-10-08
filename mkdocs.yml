@@ -70,11 +70,13 @@ nav:
           - ORCA: clusters/mindu/orca.md
       - neimeng-2:
           - 集群说明: clusters/neimeng-2/index.md
+          - Gaussian: clusters/neimeng-2/gaussian.md
           - QE: clusters/neimeng-2/qe.md
           - VASP: clusters/neimeng-2/vasp.md
           - ORCA: clusters/neimeng-2/orca.md
       - tianjin:
           - 集群说明: clusters/tianjin/index.md
+          - Gaussian: clusters/tianjin/gaussian.md
           - CP2K: clusters/tianjin/cp2k.md
           - QE: clusters/tianjin/qe.md
           - VASP: clusters/tianjin/vasp.md
