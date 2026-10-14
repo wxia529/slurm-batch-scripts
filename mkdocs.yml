@@ -64,6 +64,7 @@ nav:
       - mindu:
           - 集群说明: clusters/mindu/index.md
           - Gaussian: clusters/mindu/gaussian.md
+          - OpenMX: clusters/mindu/openmx.md
           - CP2K: clusters/mindu/cp2k.md
           - QE: clusters/mindu/qe.md
           - VASP: clusters/mindu/vasp.md
