@@ -20,6 +20,8 @@ Do not run real `sbatch` tests unless explicitly authorized on the target cluste
 
 Use Bash with `#!/usr/bin/env bash`, four-space indentation, uppercase configuration variables, quoted expansions, and `[[ ... ]]` conditionals. Submission scripts follow `my<software>.sh`, such as `mycp2k.sh`. Keep cluster paths and resource counts explicit; do not silently inherit software environments. Changes to script behavior must update the matching page under `docs/clusters/`.
 
+Thread and math-library environment variables should retain their defaults, except that `OMP_NUM_THREADS=1` may be set explicitly. Do not explicitly set or unset `MKL_*`, `OPENBLAS_*`, or `KMP_*` variables.
+
 When adding a cluster or software, also update `deploy.sh` (`MANAGED_FILES` and source resolution), the `mkdocs.yml` navigation, and Workflow path filters when documentation inputs change.
 
 ## Testing Guidelines

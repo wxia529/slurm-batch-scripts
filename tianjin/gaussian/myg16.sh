@@ -115,11 +115,11 @@ if ! source "\${g16root}/g16/bsd/g16.profile"; then
 fi
 
 # Gaussian 临时目录
-if ! mkdir -p "/tmp/\${USER}"; then
+if ! mkdir -p "\${HOME}/tmp"; then
     echo "Error: Cannot create scratch parent directory." >&2
     exit 1
 fi
-if ! GAUSS_SCRDIR=\$(mktemp -d "/tmp/\${USER}/g16_\${SLURM_JOB_ID}.XXXXXX"); then
+if ! GAUSS_SCRDIR=\$(mktemp -d "\${HOME}/tmp/g16_\${SLURM_JOB_ID}.XXXXXX"); then
     echo "Error: Cannot create GAUSS_SCRDIR: \${GAUSS_SCRDIR}" >&2
     exit 1
 fi
