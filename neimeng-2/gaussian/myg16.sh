@@ -5,7 +5,13 @@ set -u
 
 usage() {
     echo "Usage: myg16.sh <input.gjf> [cores] (default: 40, maximum: 40)"
+    echo "Options: -h, --help    Show this help and exit without submitting a job."
 }
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
 
 # 检查输入文件
 if [[ -z "${1:-}" ]]; then

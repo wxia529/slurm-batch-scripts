@@ -3,8 +3,20 @@
 set -u
 
 usage() {
-    echo "Usage: myqe-core.sh <program> <error_file> <tmp_script> <input_file> [queue] [nodes]"
+    cat <<'EOF'
+Usage: myqe-core.sh <program> <error_file> <tmp_script> <input_file> [queue] [nodes]
+
+Queue: s | small (default), c | community, h | highio
+Nodes: positive integer; default: 1
+MPI processes per node: 32
+Options: -h, --help    Show this help and exit without submitting a job.
+EOF
 }
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
 
 if (( $# < 4 || $# > 6 )); then
     echo "Error: A QE program, error file, temporary script name, input file, and optional queue/nodes are required." >&2

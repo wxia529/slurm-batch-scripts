@@ -1,5 +1,7 @@
 # 环境加载
 
+执行 `source ~/soft/slurm-batchs/env.sh -h` 或 `source ~/soft/slurm-batchs/env.sh --help` 查看环境加载用法；帮助模式不会修改 `PATH` 或退出当前 Shell。
+
 本项目包含两层环境：登录环境中的提交命令，以及计算作业内部的软件运行环境。两者不能混为一谈。
 
 ## 加载提交命令

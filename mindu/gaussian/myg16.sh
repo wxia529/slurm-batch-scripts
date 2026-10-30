@@ -24,8 +24,14 @@ Examples:
   myg16.sh test.gjf
   myg16.sh test.gjf c
   myg16.sh test.gjf h
+Options: -h, --help    Show this help and exit without submitting a job.
 EOF
 }
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
 
 # 检查输入文件
 if [[ -z "${1:-}" ]]; then
@@ -114,7 +120,11 @@ if ! source "\${g16root}/g16/bsd/g16.profile"; then
 fi
 
 # Gaussian 临时目录
-export GAUSS_SCRDIR="/tmp/\${USER}/g16_\${SLURM_JOB_ID}"
+if [[ "${QUEUE}" == "highio" ]]; then
+    export GAUSS_SCRDIR="\${HOME}/tmp/g16_\${SLURM_JOB_ID}"
+else
+    export GAUSS_SCRDIR="/tmp/\${USER}/g16_\${SLURM_JOB_ID}"
+fi
 if ! mkdir -p "\${GAUSS_SCRDIR}"; then
     echo "Error: Cannot create GAUSS_SCRDIR: \${GAUSS_SCRDIR}" >&2
     exit 1

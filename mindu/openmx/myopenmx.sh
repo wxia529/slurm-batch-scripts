@@ -27,8 +27,14 @@ Examples:
   myopenmx.sh test.dat
   myopenmx.sh test.dat community
   myopenmx.sh test.dat h 2
+Options: -h, --help    Show this help and exit without submitting a job.
 EOF
 }
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
 
 if [[ -z "${1:-}" ]]; then
     echo "Error: No OpenMX input file provided." >&2

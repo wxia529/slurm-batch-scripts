@@ -1,0 +1,35 @@
+# CP2K
+
+本页所有提交命令均支持将 `-h` 或 `--help` 作为第一个参数查看用法、参数及默认设置；查看帮助不会提交作业或生成文件。
+
+提交时会在当前目录生成并保留完整的 `mycp2k-tmp`，可执行 `sbatch mycp2k-tmp` 重提相同作业；再次运行 `mycp2k.sh` 会覆盖该文件。
+
+1. CP2K 版本为 2026.2，安装目录为 `/data/home/liqh/soft/cp2k/2026.2`
+2. 将 `/data/home/liqh/soft/cp2k/2026.2/install/bin` 写入 `PATH`，运行时使用命令名 `cp2k.psmp`
+3. 固定加载 `/data/home/liqh/soft/cp2k/2026.2/install/cp2k_env`
+4. 随后加载 `/data/home/liqh/soft/ucx/1.22-gcc8.5/env.sh`
+5. 加载环境前覆盖重建 `PATH` 和 `LD_LIBRARY_PATH`
+6. 每个节点使用 40 个 MPI 进程，支持多节点
+7. 固定使用 `p1` 分区
+8. 固定设置 `OMPI_MCA_pml=ucx`、`OMPI_MCA_btl=^openib` 和 `OMP_NUM_THREADS=1`
+9. 输入文件转换为绝对路径，作业在输入文件目录中运行
+10. Slurm 作业名使用输入文件名去掉扩展名后的名称
+11. 标准输出写入输入文件同名的 `.out`，标准错误写入 `cp2k.err`
+12. 作业成功提交后追加输入目录中的 `Batch.log`
+
+## 调用方式
+
+```text
+mycp2k.sh <input_file> [nodes]
+```
+
+示例：
+
+```bash
+mycp2k.sh water.inp
+mycp2k.sh water.inp 2
+```
+
+仅显式设置线程变量 `OMP_NUM_THREADS=1`；不设置或清除 `MKL_*`、`OPENBLAS_*`、`KMP_*`。计算节点需能读取上述 CP2K 和 UCX 环境文件；本地模拟测试不验证集群上的实际安装。
+
+默认使用 1 个节点；例如 `mycp2k.sh water.inp 2` 将申请 2 个节点、共 80 个 MPI 进程。输出文件会覆盖已有内容。直接用 `sbatch mycp2k-tmp` 重提不会追加 `Batch.log`；并发调用请使用不同提交目录，避免争用临时作业脚本。

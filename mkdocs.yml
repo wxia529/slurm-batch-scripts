@@ -72,6 +72,7 @@ nav:
       - neimeng-2:
           - 集群说明: clusters/neimeng-2/index.md
           - Gaussian: clusters/neimeng-2/gaussian.md
+          - CP2K: clusters/neimeng-2/cp2k.md
           - QE: clusters/neimeng-2/qe.md
           - VASP: clusters/neimeng-2/vasp.md
           - ORCA: clusters/neimeng-2/orca.md

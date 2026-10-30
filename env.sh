@@ -2,6 +2,18 @@
 
 # 使用 source ~/soft/slurm-batchs/env.sh 加载提交脚本命令。
 
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    cat <<'EOF'
+Usage: source ~/soft/slurm-batchs/env.sh
+       source ~/soft/slurm-batchs/env.sh -h | --help
+
+Add deployed submission-command directories to PATH in the current shell.
+SLURM_BATCHS_HOME: override the deployment root (default: ~/soft/slurm-batchs).
+Options: -h, --help    Show this help without changing PATH.
+EOF
+    return 0 2>/dev/null || exit 0
+fi
+
 SLURM_BATCHS_ROOT="${SLURM_BATCHS_HOME:-${HOME}/soft/slurm-batchs}"
 
 if [[ ! -d "$SLURM_BATCHS_ROOT" ]]; then

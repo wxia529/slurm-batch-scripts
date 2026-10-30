@@ -27,8 +27,14 @@ Examples:
   mycp2k.sh test.inp
   mycp2k.sh test.inp community
   mycp2k.sh test.inp h 2
+Options: -h, --help    Show this help and exit without submitting a job.
 EOF
 }
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
 
 if [[ -z "${1:-}" ]]; then
     echo "Error: No CP2K input file provided." >&2

@@ -39,8 +39,14 @@ Examples:
   myvasp.sh h 2
   myvasp.sh small 2 gam
   myvasp.sh highio 4 ncl
+Options: -h, --help    Show this help and exit without submitting a job.
 EOF
 }
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
 
 if (( $# > 3 )); then
     echo "Error: Too many arguments." >&2

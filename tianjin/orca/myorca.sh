@@ -3,8 +3,20 @@
 set -u
 
 usage() {
-    echo "Usage: myorca.sh <input_file> [nodes]"
+    cat <<'EOF'
+Usage: myorca.sh <input_file> [nodes]
+
+Partition: p1
+Nodes: positive integer; default: 1
+MPI processes per node: 48
+Options: -h, --help    Show this help and exit without submitting a job.
+EOF
 }
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
 
 if (( $# < 1 || $# > 2 )); then
     echo "Error: An ORCA input file and optional node count are required." >&2

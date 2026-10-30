@@ -1,5 +1,7 @@
 # Quantum ESPRESSO
 
+本页所有提交命令均支持将 `-h` 或 `--help` 作为第一个参数查看用法、参数及默认设置；查看帮助不会提交作业或生成文件。
+
 各提交命令会在当前目录生成并保留包含完整 `#SBATCH` 参数的 `*-tmp` 作业脚本，例如 `mypw-tmp`、`myneb-tmp` 和 `myfd-tmp`。可执行 `sbatch mypw-tmp` 等命令重提相同作业；再次运行对应的 QE 提交命令会覆盖该文件。
 
 1. 使用 QE 7.6，安装目录为 `/data/home/liqh/soft/QE/qe-7.6`

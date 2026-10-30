@@ -7,6 +7,7 @@ usage() {
 Usage:
   deploy.sh <cluster>
   deploy.sh --adopt-legacy <cluster>
+  deploy.sh -h | --help
 
 Cluster:
   mindu
@@ -20,6 +21,11 @@ The deployment only updates files managed by this project. It never deletes or
 modifies calculation files, Batch.log, shell configuration, or unrelated files.
 EOF
 }
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
 
 ADOPT_LEGACY=false
 if (( $# == 1 )); then

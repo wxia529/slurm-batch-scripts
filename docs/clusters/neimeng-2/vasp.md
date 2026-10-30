@@ -1,5 +1,7 @@
 # VASP
 
+本页所有提交命令均支持将 `-h` 或 `--help` 作为第一个参数查看用法、参数及默认设置；查看帮助不会提交作业或生成文件。
+
 提交时会在当前目录生成并保留完整的 `myvasp-tmp`，可执行 `sbatch myvasp-tmp` 重提相同作业；再次运行 `myvasp.sh` 会覆盖该文件。
 
 1. VASP 版本为 6.5.1 VTST，程序目录为 `/data/home/liqh/soft/vasp/vasp.6.5.1/bin`
