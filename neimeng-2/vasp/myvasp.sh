@@ -78,8 +78,8 @@ JOB_NAME=$(basename -- "$TASK_DIR")
 VASP_COMMAND="vasp_${VASP_TYPE}"
 OUTPUT_FILE="log"
 ERROR_FILE="vasp.err"
-VASP_HOME="/data/home/liqh/soft/vasp/vasp.6.5.1"
-VASP_ENV="/data/home/liqh/soft/vasp/env.sh"
+VASP_HOME="/data/home/liqh/soft/vasp/6.6.1-vtst-sol-cp-pro"
+VASP_ENV="${VASP_HOME}/env.sh"
 
 printf -v TASK_DIR_Q '%q' "$TASK_DIR"
 TMP_SCRIPT="${PWD}/myvasp-tmp"

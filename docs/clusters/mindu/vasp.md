@@ -19,7 +19,7 @@
 
 ## VASP 版本和运行类型
 
-VASP 版本固定为 `6.5.1-vtst`。第三个参数只用于选择运行类型，默认值为 `std`。
+VASP 版本固定为 `6.6.1-vtst-sol-cp-pro`。第三个参数只用于选择运行类型，默认值为 `std`。
 
 | 参数 | 运行程序 |
 | --- | --- |
@@ -31,12 +31,12 @@ VASP 版本固定为 `6.5.1-vtst`。第三个参数只用于选择运行类型�
 
 ## 运行环境
 
-1. VASP 程序目录固定为 `/home/liqh/soft/vasp/6.5.1-vtst/bin`
+1. VASP 程序目录固定为 `/home/liqh/soft/vasp/6.6.1-vtst-sol-cp-pro/bin`
 2. 启动作业前必须覆盖原有的 `PATH` 和 `LD_LIBRARY_PATH`，不能在原环境后追加
 3. `PATH` 固定重建为：
 
    ```text
-   /slurm/bin:/slurm/sbin:/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/liqh/soft/vaspkit.1.5.1/bin:/home/liqh/soft/vasp/6.5.1-vtst/bin
+   /slurm/bin:/slurm/sbin:/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/liqh/soft/vaspkit.1.5.1/bin:/home/liqh/soft/vasp/6.6.1-vtst-sol-cp-pro/bin
    ```
 
 4. `LD_LIBRARY_PATH` 固定重建为：
@@ -45,9 +45,8 @@ VASP 版本固定为 `6.5.1-vtst`。第三个参数只用于选择运行类型�
    /slurm/lib:/lib64:/usr/lib64:/usr/local/lib64
    ```
 
-5. 完成上述环境重建后，再加载固定的 Toolchain 环境文件 `/home/liqh/soft/toolchain/vasp651.env`
-6. 固定设置 `I_MPI_ADJUST_REDUCE=3`
-7. 使用 `mpirun -n <MPI 进程总数> <运行程序>` 启动作业
+5. 完成上述环境重建后，再加载 VASP 安装目录中的环境文件 `/home/liqh/soft/vasp/6.6.1-vtst-sol-cp-pro/env.sh`
+6. 使用 `mpirun -n <MPI 进程总数> <运行程序>` 启动作业
 
 ## 输出和提交记录
 

@@ -130,8 +130,8 @@ JOB_NAME=$(basename -- "$TASK_DIR")
 VASP_COMMAND="vasp_${VASP_TYPE}"
 OUTPUT_FILE="log"
 ERROR_FILE="vasp.err"
-VASP_BIN="/home/liqh/soft/vasp/6.5.1-vtst/bin"
-TOOLCHAIN_ENV="/home/liqh/soft/toolchain/vasp651.env"
+VASP_BIN="/home/liqh/soft/vasp/6.6.1-vtst-sol-cp-pro/bin"
+TOOLCHAIN_ENV="/home/liqh/soft/vasp/6.6.1-vtst-sol-cp-pro/env.sh"
 
 printf -v TASK_DIR_Q '%q' "$TASK_DIR"
 
@@ -159,8 +159,6 @@ if ! source ${TOOLCHAIN_ENV}; then
     echo "Error: Failed to load the VASP toolchain environment: ${TOOLCHAIN_ENV}" >&2
     exit 1
 fi
-
-export I_MPI_ADJUST_REDUCE=3
 
 cd ${TASK_DIR_Q} || exit 1
 

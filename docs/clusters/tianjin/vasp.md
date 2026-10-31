@@ -4,8 +4,8 @@
 
 提交时会在当前目录生成并保留完整的 `myvasp-tmp`，可执行 `sbatch myvasp-tmp` 重提相同作业；再次运行 `myvasp.sh` 会覆盖该文件。
 
-1. VASP 版本为 6.5.1 VTST，程序目录为 `/data/home/liqh/soft/vasp/vasp.6.5.1/bin`
-2. 固定加载 `/data/home/liqh/soft/vasp/env.sh`
+1. VASP 版本为 `6.6.1-vtst-sol-cp-pro`，程序目录为 `/data/home/liqh/soft/vasp/6.6.1-vtst-sol-cp-pro/bin`
+2. 固定加载 `/data/home/liqh/soft/vasp/6.6.1-vtst-sol-cp-pro/env.sh`
 3. 每个节点固定使用 48 个核心，支持多节点 MPI
 4. 固定使用 `p1` 分区
 5. 支持 `std`、`gam` 和 `ncl`，默认使用 `std`
