@@ -9,7 +9,7 @@ myg16.sh water.gjf
 myg16.sh water.gjf 16
 ```
 
-- 使用 Gaussian 16 A03，安装根目录为 `/data/app/gaussian/G16-A03`。
+- 使用 Gaussian 16 C.01（AVX），安装根目录为 `/data/home/liqh/soft/gaussian/16.C01`。
 - 固定 `p1` 分区、单节点、一个 task，默认申请 48 核；第二个参数可指定 1–48 核。
 - 输入文件必须显式设置 `%NProcShared`，数值不能超过申请核心数；所有 Link1 段中出现的设置都会检查。较少的输入核心数允许提交，但可能闲置申请的 CPU。
 - 不支持 `%CPU`、`%NProc`、`%LindaWorkers` 和 `%NProcLinda`，使用 `%NProcShared` 配置单节点并行。

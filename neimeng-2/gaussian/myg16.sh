@@ -106,7 +106,7 @@ echo "Requested CPU cores: \$SLURM_CPUS_PER_TASK"
 ulimit -s unlimited
 
 # Gaussian 环境
-export g16root=/data/app/gaussian/G16-A03
+export g16root=/data/home/liqh/soft/gaussian/16.C01
 
 if [[ ! -r "\${g16root}/g16/bsd/g16.profile" || ! -x "\${g16root}/g16/g16" ]]; then
     echo "Error: Gaussian profile or executable is unavailable." >&2
