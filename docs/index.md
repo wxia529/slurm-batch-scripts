@@ -26,7 +26,7 @@ flowchart LR
 ## 从这里开始
 
 - [快速开始](getting-started.md)：完成第一次部署和任务提交
-- [部署与更新](deployment.md)：了解部署范围和用户文件保护
+- [部署与更新](deployment.md)：了解部署范围、只读安装目录和内容基线
 - [环境加载](environment.md)：加载提交命令并理解作业环境
 - [Batch.log](batch-log.md)：查看统一提交历史
 - [参与维护](contributing.md)：修改脚本、测试和提交 Pull Request
