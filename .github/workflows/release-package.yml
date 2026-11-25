@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash -n deploy.sh env.sh
+          bash -n deploy.sh env.sh tests/deploy-readonly.sh
           find mindu neimeng-2 tianjin -type f -name '*.sh' -print0 | xargs -0 -r bash -n
           git diff --check
 
@@ -55,15 +55,33 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          remove_target() {
+              if [[ -n "${cluster_target:-}" && -d "$cluster_target" ]]; then
+                  chmod -R u+w -- "$cluster_target" || true
+                  rm -rf -- "$cluster_target"
+              fi
+          }
+          cleanup_target() {
+              local status=$?
+              remove_target
+              exit "$status"
+          }
           for cluster in mindu neimeng-2 tianjin; do
               cluster_target=$(mktemp -d)
-              trap 'rm -rf -- "$cluster_target"' EXIT
+              trap cleanup_target EXIT
               SLURM_BATCHS_TARGET="$cluster_target" ./deploy.sh "$cluster"
               test -f "$cluster_target/.slurm-batchs-managed"
+              test -f "$cluster_target/.slurm-batchs-baseline"
               grep -Fxq "cluster=$cluster" "$cluster_target/.slurm-batchs-managed"
-              rm -rf -- "$cluster_target"
+              test "$(stat -c '%a' -- "$cluster_target")" = "555"
+              remove_target
               trap - EXIT
+              cluster_target=""
           done
+
+      - name: Test read-only deploy protections
+        shell: bash
+        run: bash tests/deploy-readonly.sh
 
       - name: Build documentation
         run: mkdocs build --strict

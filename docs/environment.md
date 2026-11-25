@@ -12,7 +12,7 @@
 source ~/soft/slurm-batchs/env.sh
 ```
 
-`env.sh` 会扫描 `~/soft/slurm-batchs` 的一级子目录，将包含可执行文件的目录加入 `PATH`。重复加载不会重复添加路径。
+`env.sh` 会扫描 `~/soft/slurm-batchs` 的一级子目录，将包含可执行文件的目录加入 `PATH`。重复加载不会重复添加路径。安装目录为只读时仍然可以加载；`env.sh` 不向安装目录写入文件。
 
 加载后可以直接运行：
 
