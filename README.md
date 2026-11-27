@@ -6,7 +6,7 @@
 | --- | ---: | --- | --- |
 | `mindu` | 32 | `small`、`community`、`highio` | Gaussian、CP2K、QE、VASP、ORCA、OpenMX |
 | `neimeng-2` | 40 | `p1` | Gaussian、CP2K、QE、VASP、ORCA |
-| `tianjin` | 48 | `p1` | Gaussian、CP2K、QE、VASP、ORCA |
+| `tianjin` | 48 | `p1` | Gaussian、CP2K、QE、VASP、ORCA、RASPA3 |
 
 ## 快速开始
 
