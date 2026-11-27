@@ -83,4 +83,5 @@ nav:
           - QE: clusters/tianjin/qe.md
           - VASP: clusters/tianjin/vasp.md
           - ORCA: clusters/tianjin/orca.md
+          - RASPA3: clusters/tianjin/raspa3.md
   - 参与维护: contributing.md
