@@ -35,9 +35,10 @@ git switch -c feature/update-cp2k
 执行基础检查：
 
 ```bash
-bash -n deploy.sh env.sh tests/deploy-readonly.sh
+bash -n deploy.sh env.sh tests/deploy-readonly.sh tests/mindu-abinit.sh
 bash -n mindu/cp2k/mycp2k.sh
 bash -n mindu/qe/myqe-core.sh
+bash -n mindu/abinit/myabinit.sh
 find mindu/qe -type f -name '*.sh' -print0 | xargs -0 -r bash -n
 find neimeng-2 -type f -name '*.sh' -print0 | xargs -0 -r bash -n
 bash -n tianjin/vasp/myvasp.sh
@@ -46,6 +47,7 @@ bash -n tianjin/qe/myqe-core.sh
 find tianjin/qe -type f -name '*.sh' -print0 | xargs -0 -r bash -n
 bash -n tianjin/orca/myorca.sh
 bash tests/deploy-readonly.sh
+bash tests/mindu-abinit.sh
 mkdocs build --strict
 git diff --check
 ```

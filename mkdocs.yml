@@ -69,6 +69,7 @@ nav:
           - QE: clusters/mindu/qe.md
           - VASP: clusters/mindu/vasp.md
           - ORCA: clusters/mindu/orca.md
+          - ABINIT: clusters/mindu/abinit.md
       - neimeng-2:
           - 集群说明: clusters/neimeng-2/index.md
           - Gaussian: clusters/neimeng-2/gaussian.md

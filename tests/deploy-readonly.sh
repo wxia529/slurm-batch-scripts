@@ -399,6 +399,7 @@ runtime=$(deploy_fresh mindu)
 job=$(mktemp -d "${WORKDIR}/job.XXXXXX")
 printf 'water\n' > "$job/water.gjf"
 printf 'water\n' > "$job/water.in"
+printf 'acell 3*10.26\n' > "$job/water.abi"
 mock=$(mktemp -d "${WORKDIR}/mock.XXXXXX")
 cat > "$mock/sbatch" <<'EOF'
 #!/bin/sh
@@ -410,8 +411,9 @@ names_before=$(name_list "$runtime")
     cd -- "$job"
     PATH="${mock}:${PATH}" "$runtime/gaussian/myg16.sh" water.gjf
     PATH="${mock}:${PATH}" "$runtime/qe/mypw.sh" water.in
+    PATH="${mock}:${PATH}" "$runtime/abinit/myabinit.sh" water.abi
 ) >"${WORKDIR}/submit.out"
-[[ -f "$job/myg16-tmp" && -f "$job/mypw-tmp" && -f "$job/Batch.log" ]] || fail "job files were not written in the calculation directory"
+[[ -f "$job/myg16-tmp" && -f "$job/mypw-tmp" && -f "$job/myabinit-tmp" && -f "$job/Batch.log" ]] || fail "job files were not written in the calculation directory"
 grep -q 'job_id=424242' "$job/Batch.log" || fail "Batch.log missing job id"
 [[ "$(name_list "$runtime")" == "$names_before" ]] || fail "submission wrote into the install tree"
 set +e
